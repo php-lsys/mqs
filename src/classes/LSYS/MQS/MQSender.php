@@ -8,7 +8,7 @@ class MQSender{
         $this->encoder=$encodeer;
     }
     public function send($class,array $args,$dealy=0){
-        $topic=$this->encoder->find_topic($class);
+        $topic=$this->encoder->findTopic($class);
         $msg=$this->encoder->msg($class,$args);
         return $this->sender->send($topic,$msg,$dealy);
     }

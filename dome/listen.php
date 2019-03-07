@@ -8,13 +8,13 @@ foreach ($topics as $k=>$topic){
     $listen[$topic]=new MQListen(new Simple($topic));
     switch ($topic){
         case 'MQ':
-            $listen[$topic]->set_runer($topic,[user1::class,user2::class]);
+            $listen[$topic]->setRuner($topic,[user1::class,user2::class]);
         break;
         default: unset($topics[$k]);
     }
 }
 
-$redismq=\LSYS\Redis\DI::get()->redis_mq();
+$redismq=\LSYS\Redis\DI::get()->redisMQ();
 while (true){
     $data=$redismq->pop($topics,FALSE,$ack);
     if(count($data)!=2)continue;

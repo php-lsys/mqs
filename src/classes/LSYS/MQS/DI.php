@@ -1,7 +1,7 @@
 <?php
 namespace LSYS\MQS;
 /**
- * @method \LSYS\MQS\MQSender mq_sender() 
+ * @method \LSYS\MQS\MQSender MQSender() 
  */
 class DI extends \LSYS\DI{
     /**
@@ -9,7 +9,7 @@ class DI extends \LSYS\DI{
      */
     public static function get(){
         $di=parent::get();
-        !isset($di->mq_sender)&&$di->mq_sender(new \LSYS\DI\VirtualCallback(\LSYS\MQS\MQSender::class));
+        !isset($di->MQSender)&&$di->MQSender(new \LSYS\DI\VirtualCallback(\LSYS\MQS\MQSender::class));
         return $di;
     }
 }

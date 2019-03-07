@@ -12,7 +12,7 @@ require_once  __DIR__."/Bootstarp.php";
 \LSYS\MQS\DI::set(function (){
     return (new \LSYS\MQS\DI)->mq_sender(new SingletonCallback(function(){
         //你的具体的消息队列服务器,这里使用REDIS
-        $redismq=\LSYS\Redis\DI::get()->redis_mq();
+        $redismq=\LSYS\Redis\DI::get()->redisMQ();
         return new MQSender(new SendCall(function($topic,$msg,$dealy)use($redismq){
           //根据你实际的MQ服务器进行发送
             return $redismq->push($topic,$msg,$dealy);
@@ -38,7 +38,7 @@ foreach ($topics as $k=>$topic){
         default: unset($topics[$k]);
     }
 }
-$redismq=\LSYS\Redis\DI::get()->redis_mq();//得到REDIS MQ对象 在redis上实现
+$redismq=\LSYS\Redis\DI::get()->redisMQ();//得到REDIS MQ对象 在redis上实现
 while (true){
     $data=$redismq->pop($topics,FALSE,$ack);//从MQ里取消息
     if(count($data)!=2)continue;

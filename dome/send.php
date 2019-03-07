@@ -6,8 +6,8 @@ use LSYS\DI\SingletonCallback;
 require_once  __DIR__."/Bootstarp.php";
 
 \LSYS\MQS\DI::set(function (){
-    return (new \LSYS\MQS\DI)->mq_sender(new SingletonCallback(function(){
-        $redismq=\LSYS\Redis\DI::get()->redis_mq();
+    return (new \LSYS\MQS\DI)->MQSender(new SingletonCallback(function(){
+        $redismq=\LSYS\Redis\DI::get()->redisMQ();
         return new MQSender(new SendCall(function($topic,$msg,$dealy)use($redismq){
             return $redismq->push($topic,$msg,$dealy);
         }),new Simple("MQ"));
@@ -15,4 +15,4 @@ require_once  __DIR__."/Bootstarp.php";
 });
 
 
-var_dump(\LSYS\MQS\DI::get()->mq_sender()->send(user_runer1::class,[uniqid(),uniqid()]));
+var_dump(\LSYS\MQS\DI::get()->MQSender()->send(user_runer1::class,[uniqid(),uniqid()]));

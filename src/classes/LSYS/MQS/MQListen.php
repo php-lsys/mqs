@@ -6,11 +6,11 @@ class MQListen{
     public function __construct(DataDeCode $decodeer){
         $this->decodeer=$decodeer;
     }
-    public function set_runer($topic,array $class){
+    public function setRuner($topic,array $class){
         $this->class[$topic]=$class;
     }
     public function exec($topic,$runer_msg){
-        $interface=$this->decodeer->find_class($topic,$runer_msg);
+        $interface=$this->decodeer->findClass($topic,$runer_msg);
         if(!$interface||!interface_exists($interface,true))return null;
         $class=isset($this->class[$topic])?$this->class[$topic]:[];
         $classs=[];
@@ -19,7 +19,7 @@ class MQListen{
         }
         foreach($classs as $k=>$class){
             try{
-                if(is_subclass_of($class, RunerLevel::class))$level=$class::get_level();
+                if(is_subclass_of($class, RunerLevel::class))$level=$class::getLevel();
                 else $level=0;
                 $classs[$k]=array($class,$level);
             }catch(\Exception $e){

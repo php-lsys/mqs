@@ -9,7 +9,7 @@ class Simple implements DataDeCode,DataEnCode{
         $this->topic=$topic;
         $this->namespace=empty($namespace)?'':"\\".$namespace."\\";
     }
-    public function find_class($topic,$msg){
+    public function findClass($topic,$msg){
         //sss:{}
         if(preg_match("/^([a-z][a-z0-9_]+):[\{\[]/si",$msg,$match)){
             return $this->namespace.$match[1];
@@ -22,7 +22,7 @@ class Simple implements DataDeCode,DataEnCode{
         if(is_array($msg))return $msg;
         return [];
     }
-    public function find_topic($class){
+    public function findTopic($class){
         if (is_array($this->topic)&&isset($this->topic[$class])) return $this->topic[$class];
         if (is_array($this->topic))return array_shift($this->topic);
         return strval($this->topic);
