@@ -9,13 +9,13 @@
 		}
 	},
 	"require" : {
-		"lsys/i18n" : "~0.0.0",
-		"lsys/config" : "~0.0.0"
+		"lsys/i18n" : "~0.0.1",
+		"lsys/config" : "~0.0.1"
 	},
 	"require-dev" : {
-		"lsys/redis" : "~0.0.0"
+		"lsys/redis" : "~0.0.1"
 	},
 	"suggest" : {
-		"lsys/redis" : "~0.0.0"
+		"lsys/redis" : "~0.0.1"
 	}
 }
