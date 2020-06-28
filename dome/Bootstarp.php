@@ -14,7 +14,7 @@ class user1 implements user_runer1{
     }
 }
 class user2 implements user_runer1,RunerLevel{
-    public static function getLevel(){
+    public static function getLevel():int{
         return 1;
     }
     public function __construct($arg1,$arg2=1){

@@ -6,11 +6,24 @@ class MQListen{
     public function __construct(DataDeCode $decodeer){
         $this->decodeer=$decodeer;
     }
-    public function setRuner($topic,array $class){
+    /**
+     * 注册消费者
+     * @param string $topic
+     * @param array $class
+     */
+    public function setRuner(string $topic,array $class){
         $this->class[$topic]=$class;
+        return $this;
     }
-    public function exec($topic,$runer_msg){
-        $interface=$this->decodeer->findClass($topic,$runer_msg);
+    /**
+     * 根据注册的消费者返回消费者对象列表
+     * @param string $topic
+     * @param string $runer_msg
+     * @return ?[]
+     */
+    public function exec(string $topic,string $runer_msg):?array{
+        $this->decodeer->loadMsg($topic, $runer_msg);
+        $interface=$this->decodeer->findClass();
         if(!$interface||!interface_exists($interface,true))return null;
         $class=isset($this->class[$topic])?$this->class[$topic]:[];
         $classs=[];
@@ -31,7 +44,7 @@ class MQListen{
             if($val[1]<$val1[1])return 1;
             return 0;
         });
-        $args=(array)$this->decodeer->decode($topic,$runer_msg);
+        $args=(array)$this->decodeer->deCode($topic,$runer_msg);
         foreach($classs as $k=>$v){
             if(is_array($v)){
                 list($class)=$v;

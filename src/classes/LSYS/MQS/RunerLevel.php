@@ -1,5 +1,9 @@
 <?php
 namespace LSYS\MQS;
 interface RunerLevel{
-    public static function getLevel();
+    /**
+     * 消费者对象优先级
+     * @return int
+     */
+    public static function getLevel():int;
 }

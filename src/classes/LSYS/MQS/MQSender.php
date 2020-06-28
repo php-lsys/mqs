@@ -7,9 +7,16 @@ class MQSender{
         $this->sender=$sender;
         $this->encoder=$encodeer;
     }
-    public function send($class,array $args,$dealy=0){
+    /**
+     * 对外统一发送方法
+     * @param string $class
+     * @param array $args
+     * @param int $dealy
+     * @return bool
+     */
+    public function send(string $class,array $args,int $dealy=0):bool{
         $topic=$this->encoder->findTopic($class);
-        $msg=$this->encoder->msg($class,$args);
+        $msg=$this->encoder->msg($topic,$class,$args);
         return $this->sender->send($topic,$msg,$dealy);
     }
 }
